@@ -18,8 +18,10 @@ function CharacterStats(stats) {
   GameObject.call(this, stats);
   this.healthPoints = stats.healthPoints;
 }
+
 function Humanoid(noid) {
   CharacterStats.call(this, noid);
+  //this.takeDamage = noid.takeDamage;
   this.team = noid.team;
   this.weapons = noid.weapons;
   this.language = noid.language;
@@ -28,12 +30,18 @@ function Humanoid(noid) {
 GameObject.prototype.destroy = function() {
   return `${this.name} was removed from the game`;
 };
+CharacterStats.prototype = Object.create(GameObject.prototype);
+
 CharacterStats.prototype.takeDamage = function() {
   return `${this.name} took damage`;
 };
+Humanoid.prototype = Object.create(CharacterStats.prototype);
+
 Humanoid.prototype.greet = function() {
   return `${this.name} offers a greeting in ${this.language}`;
 };
+//reassigning prototypes
+
 /*
   === GameObject ===
   * x createdAt
@@ -110,6 +118,7 @@ const archer = new Humanoid({
 });
 
 console.log(mage.createdAt); // Today's date
+
 console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
 console.log(swordsman.healthPoints); // 15
 console.log(mage.name); // Bruce
