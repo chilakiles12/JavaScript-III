@@ -8,38 +8,44 @@
   Each constructor function has unique properties and methods that are defined in their block comments below:
 */
 //constructors vv
-function GameObject(attributes) {
-  this.newCreatedAt = attributes.createdAt;
-  this.newName = attributes.name;
-  this.newdimensions = attributes.dimensions;
-  console.log(this);
+function GameObject(attrs) {
+  this.createdAt = attrs.createdAt;
+  this.name = attrs.name;
+  this.dimensions = attrs.dimensions;
 }
+
+function CharacterStats(stats) {
+  GameObject.call(this, stats);
+  this.healthPoints = stats.healthPoints;
+}
+function Humanoid(noid) {
+  CharacterStats.call(this, noid);
+  this.team = noid.team;
+  this.weapons = noid.weapons;
+  this.language = noid.language;
+}
+//Prototypes vv
 GameObject.prototype.destroy = function() {
   return `${this.name} was removed from the game`;
 };
-
-function CharacterStats(stats) {
-  this.newHealthPoints = stats.healthPoints;
-  console.log(this);
-}
-function Humanoid(noid) {
-  this.newTeam = noid.team;
-  this.newWeapons = noid.weapons;
-  this.newLanguage = noid.language;
-  console.log(this);
-}
+CharacterStats.prototype.takeDamage = function() {
+  return `${this.name} took damage`;
+};
+Humanoid.prototype.greet = function() {
+  return `${this.name} offers a greeting in ${this.language}`;
+};
 /*
   === GameObject ===
   * x createdAt
   * x name
   * x dimensions (These represent the character's size in the video game)
-  * destroy() // prototype method that returns: `${this.name} was removed from the game.`
+  * x destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
 
 /*
   === CharacterStats ===
   * x healthPoints
-  * takeDamage() // prototype method -> returns the string '<object name> took damage.'
+  * x takeDamage() // prototype method -> returns the string '<object name> took damage.'
   * should inherit destroy() from GameObject's prototype
 */
 
