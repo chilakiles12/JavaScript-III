@@ -39,3 +39,11 @@ const newbind = guy.callName.bind(girl);
 // Principle 4
 
 // code example for Explicit Binding
+function Tools(tool) {
+  (this.tool = tool),
+    (this.access = function() {
+      console.log(`${this.tool} is used for construction`);
+    });
+}
+
+const hammer = new Tools('Hammer');
