@@ -21,7 +21,6 @@ function CharacterStats(stats) {
 
 function Humanoid(noid) {
   CharacterStats.call(this, noid);
-  //this.takeDamage = noid.takeDamage;
   this.team = noid.team;
   this.weapons = noid.weapons;
   this.language = noid.language;
@@ -30,13 +29,13 @@ function Humanoid(noid) {
 GameObject.prototype.destroy = function() {
   return `${this.name} was removed from the game`;
 };
-CharacterStats.prototype = Object.create(GameObject.prototype);
 
+CharacterStats.prototype = Object.create(GameObject.prototype);
 CharacterStats.prototype.takeDamage = function() {
   return `${this.name} took damage`;
 };
-Humanoid.prototype = Object.create(CharacterStats.prototype);
 
+Humanoid.prototype = Object.create(CharacterStats.prototype);
 Humanoid.prototype.greet = function() {
   return `${this.name} offers a greeting in ${this.language}`;
 };
